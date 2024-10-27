@@ -17,8 +17,6 @@ public:
     void add_passengers(int num_people);
     void subtract_passengers(int num_people);
     void transfer_passengers(Bus *other_bus, int num_people);
-    void print_status() const;
-
 };
 
 #endif

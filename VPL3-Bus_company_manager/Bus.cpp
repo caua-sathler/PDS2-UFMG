@@ -49,8 +49,3 @@ void Bus::transfer_passengers(Bus *p, int num) {
     }
     
 }
-
-void Bus::print_status() const {
-    std::cout << lisense_plate << " (" << current_occupancy << "/" 
-    << max_capacity << ")" << std::endl;  
-}
