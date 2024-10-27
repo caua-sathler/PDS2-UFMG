@@ -11,14 +11,14 @@ private:
 
 public:
     Bus(std::string lisence_plate, int max_capacity);
-    void add_passengers(int x);
-    void subtract_passengers(int y);
-    void transfer_passengers(Bus *p, int z);
+    std::string get_plate() const;
+    int get_max_capacity() const;
+    int get_current_occupancy() const;
+    void add_passengers(int num_people);
+    void subtract_passengers(int num_people);
+    void transfer_passengers(Bus *other_bus, int num_people);
     void print_status() const;
 
 };
-
-
-
 
 #endif
