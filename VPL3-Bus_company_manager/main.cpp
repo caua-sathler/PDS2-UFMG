@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-int main(){
+int main() {
     Company company;
 
     char command;
@@ -13,10 +13,10 @@ int main(){
     std::string plate_1;
     std::string plate_2;
 
-    while(1){
+    while(1) {
         std::cin >> command;
     
-        if(command == 'C'){
+        if(command == 'C') {
             std::cin >> plate_1;
             std::cin >> max_capacity;
             if(company.add_bus(plate_1, max_capacity) == nullptr)
@@ -27,7 +27,7 @@ int main(){
         continue;
         }
 
-        if(command == 'S'){
+        if(command == 'S') {
             std::cin >> plate_1;
             std::cin >> num_people;
             Bus* bus = company.bus_search(plate_1);
@@ -41,7 +41,7 @@ int main(){
         continue;
         }
 
-        if(command == 'D'){
+        if(command == 'D') {
             std::cin >> plate_1;
             std::cin >> num_people;
             Bus* bus = company.bus_search(plate_1);
@@ -54,7 +54,7 @@ int main(){
         continue;
         }
 
-        if(command == 'T'){
+        if(command == 'T') {
             std::cin >> plate_1;
             std::cin >> plate_2;
             std::cin >> num_people;
@@ -69,12 +69,12 @@ int main(){
         continue;
         }
 
-        if(command == 'I'){
+        if(command == 'I') {
             company.print_bus_status();
         continue;
         }
 
-        if(command == 'F'){
+        if(command == 'F') {
             break;
         }
 
