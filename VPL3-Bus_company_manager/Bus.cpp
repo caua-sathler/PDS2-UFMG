@@ -21,30 +21,30 @@ int Bus::get_current_occupancy() const {
 }
 
 void Bus::add_passengers(int num) {
-    if(num > (max_capacity - current_occupancy))
+    if(current_occupancy + num > max_capacity)
         std::cout << "ERRO : onibus lotado" << std::endl;
      else {
-        current_occupancy =+ num;
+        current_occupancy = current_occupancy + num;
         std::cout << "passageiros subiram com sucesso" << std::endl;
      }   
 }
 
 void Bus::subtract_passengers(int num) {
-    if(num > current_occupancy)
+    if((current_occupancy - num) < 0)
         std::cout << "ERRO : faltam passageiros" << std::endl;
     else {
-        current_occupancy =- num;
+        current_occupancy = current_occupancy - num;
         std::cout << "passageiros desceram com sucesso" << std::endl;
     }
         
 }
 
 void Bus::transfer_passengers(Bus *p, int num) {
-    if(num > current_occupancy || num > (p->max_capacity - p->current_occupancy))
+    if((current_occupancy - num) < 0 || (p->current_occupancy + num) > p->max_capacity)
         std::cout << "ERRO : transferencia cancelada" << std::endl;
     else {
-        current_occupancy =- num;
-        p->current_occupancy =+ num;
+        current_occupancy = current_occupancy - num;
+        p->current_occupancy = p->current_occupancy + num;
         std::cout << "transferencia de passageiros efetuada" << std::endl;
     }
     
