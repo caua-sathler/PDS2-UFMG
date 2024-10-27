@@ -21,6 +21,7 @@ Bus* Company::add_bus(std::string lisense_plate, int max_capacity){
             }
         }
     }
+    return nullptr;
 }
 
 Bus* Company::bus_search(std::string lisense_plate) const{
