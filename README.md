@@ -1,2 +1,2 @@
 # PDS2-UFMG
-Repositório focado em compartilhar as habilidades desenvolvidas durante a disciplina de Programação e Desenvolvimento de Software 2 na Universidade Federal de Minas Gerais.
+Repository focused on sharing the skills developed during the course Programming and Software Development 2 at the Universidade Federal de Minas Gerais (UFMG).
