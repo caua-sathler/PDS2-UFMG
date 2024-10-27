@@ -11,11 +11,11 @@ private:
     Bus* buses[20];
 
 public:
-    Company(){};
+    Company();
     Bus* add_bus(std::string lisense_plate, int max_capacity);
     Bus* bus_search(std::string lisense_plate) const;
     void print_bus_status() const;
-    ~Company(){};
+    ~Company();
 };
 
 #endif
