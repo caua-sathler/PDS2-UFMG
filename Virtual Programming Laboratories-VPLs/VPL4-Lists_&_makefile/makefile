@@ -14,15 +14,19 @@ OBJECTS = $(BUILDDIR)/list.o $(BUILDDIR)/main.o
 
 all: $(TARGET)
 
+# Ensure build directory exists
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
+
 # Steps to create the executable
-$(TARGET): $(OBJECTS)
+$(TARGET): $(BUILDDIR) $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $(TARGET)
 
 # Steps to compile each .cpp into .o
-$(BUILDDIR)/list.o: $(SRCDIR)/list.cpp include/list.hpp include/node.hpp
+$(BUILDDIR)/list.o: $(SRCDIR)/list.cpp include/list.hpp include/node.hpp | $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/list.cpp -o $(BUILDDIR)/list.o
 
-$(BUILDDIR)/main.o: $(SRCDIR)/main.cpp include/list.hpp
+$(BUILDDIR)/main.o: $(SRCDIR)/main.cpp include/list.hpp | $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/main.cpp -o $(BUILDDIR)/main.o
 
 # Clean up binary files
