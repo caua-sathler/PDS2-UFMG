@@ -3,8 +3,9 @@
 #include <sstream> 
 #include <fstream>
 #include <string>
-#include <map>
 #include <cctype>
+#include <map>
+
 
 int main() {
     std::string file_name;
