@@ -1,37 +1,40 @@
-# Variables
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Iinclude
+# Variables 
+CC = g++
+CCFLAGS = -Wall -g -Iinclude
 
 # Directories
-SRCDIR = src
-BUILDDIR = build
+SRC_DIR = src
+B_DIR = build
 
-# Final target
-TARGET = vpl_execution
+# Target
+TARGET = VPL3.exe
 
-# Create a list of .o objects
-OBJECTS = $(BUILDDIR)/list.o $(BUILDDIR)/main.o
+# List of all .o files
+OBJECTS = $(B_DIR)/Bus.o $(B_DIR)/Company.o $(B_DIR)/main.o
 
 all: $(TARGET)
 
+# Steps to create the .exe target file
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $(TARGET)
+
 # Ensure build directory exists
-$(BUILDDIR):
-	mkdir -p $(BUILDDIR)
+$(B_DIR):
+	mkdir -p $(B_DIR)
 
-# Steps to create the executable
-$(TARGET): $(BUILDDIR) $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET)
+# Steps to create each .o file
+$(B_DIR)/Bus.o: $(SRC_DIR)/Bus.cpp include/Bus.hpp | $(B_DIR)
+	$(CC) $(CCFLAGS) -c $(SRC_DIR)/Bus.cpp -o $(B_DIR)/Bus.o
 
-# Steps to compile each .cpp into .o
-$(BUILDDIR)/list.o: $(SRCDIR)/list.cpp include/list.hpp include/node.hpp | $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/list.cpp -o $(BUILDDIR)/list.o
+$(B_DIR)/Company.o: $(SRC_DIR)/Company.cpp include/Bus.hpp include/Company.hpp | $(B_DIR)
+	$(CC) $(CCFLAGS) -c $(SRC_DIR)/Company.cpp -o $(B_DIR)/Company.o 
 
-$(BUILDDIR)/main.o: $(SRCDIR)/main.cpp include/list.hpp | $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/main.cpp -o $(BUILDDIR)/main.o
+$(B_DIR)/main.o: $(SRC_DIR)/main.cpp include/Bus.hpp include/Company.hpp | $(B_DIR)
+	$(CC) $(CCFLAGS) -c $(SRC_DIR)/main.cpp -o $(B_DIR)/main.o 
 
 # Clean up binary files
 clean:
-	rm -f $(BUILDDIR)/*.o $(TARGET)
+	rm -f $(B_DIR)/*.o $(TARGET)
 
 # Avoid redundancies between files and commands
 .PHONY: all clean
