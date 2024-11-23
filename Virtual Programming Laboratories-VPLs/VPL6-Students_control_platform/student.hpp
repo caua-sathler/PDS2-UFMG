@@ -12,8 +12,8 @@ private:
 
 public:
     Student(std::string name, int id, std::vector<int> grades);
-    void average_grade(std::vector<int> grades);
-    void min_max_grade(std::vector<int> grades);
+    float average_grade(std::vector<int> grades);
+    int min_max_grade(std::vector<int> grades);
     
 };
 
