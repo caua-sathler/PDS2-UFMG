@@ -7,10 +7,10 @@
 
 class Point {
 private:
-    int _x;
-    int _y;
+    float _x;
+    float _y;
 public:
-    Point(int x, int y) : _x(x), _y(y) {}; 
+    Point(float x, float y) : _x(x), _y(y) {}; 
 
     Point() : Point(0,0) {};
 
@@ -20,10 +20,10 @@ public:
     int get_y() {
         return _y;
     }
-    void set_x(int new_x) {
+    void set_x(float new_x) {
         this->_x = new_x;
     }
-    void set_y(int new_y) {
+    void set_y(float new_y) {
         this->_y = new_y;
     }
 };
@@ -33,7 +33,7 @@ class Geometric_figure {
 private:
     Point center;
 public:
-    Geometric_figure(int x, int y) {
+    Geometric_figure(float x, float y) {
         this->center.set_x(x);
         this->center.set_y(y);
     }
@@ -46,12 +46,12 @@ public:
 
 };
 
-class Retangule : protected Geometric_figure {
+class Retangule : public Geometric_figure {
 private:
     float side_a;
     float side_b;
 public:
-    Retangule(int x, int y, float a, float b) : Geometric_figure(x,y), side_a(a), side_b(b) {};
+    Retangule(float x, float y, float a, float b) : Geometric_figure(x,y), side_a(a), side_b(b) {};
 
     void draw() {
         Geometric_figure::draw();
@@ -64,13 +64,13 @@ public:
 
 };
 
-class Triangule : protected Geometric_figure {
+class Triangule : public Geometric_figure {
 private:
     float base;
     float height;
     
 public:
-    Triangule(int x, int y, float b, float h) : Geometric_figure(x,y), base(b), height(h) {};
+    Triangule(float x, float y, float b, float h) : Geometric_figure(x,y), base(b), height(h) {};
 
     void draw() {
         Geometric_figure::draw();
@@ -81,11 +81,11 @@ public:
     }
 };
 
-class Circle : protected Geometric_figure {
+class Circle : public Geometric_figure {
 private:
     float radius;
 public:
-    Circle(int x, int y, float r) : Geometric_figure(x,y), radius(r) {};
+    Circle(float x, float y, float r) : Geometric_figure(x,y), radius(r) {};
 
     void draw() {
         Geometric_figure::draw();
@@ -100,14 +100,40 @@ public:
 
 
 int main() {
-    std::vector<Geometric_figure> v;   
+    std::vector<Geometric_figure*> v;   
     char command;
+    float x;
+    float y;
 
     while (0) {
         std::cin >> command;
         if(command == 'R') {
-            
+            float side_a;
+            float side_b;
+            std::cin >> x >> y >> side_a >> side_b;
+
+            Retangule* r = new Retangule(x, y, side_a, side_b);
+            v.push_back(r);
         }
+        
+        if(command == 'C') {
+            float radius;
+            std::cin >> x >> y >> radius;
+
+            Circle* c = new Circle(x, y, radius);
+            v.push_back(c);
+        }
+
+        if(command = 'T') {
+            float base;
+            float height;
+            std::cin >> x >> y >> base >> height;
+
+            Triangule* t = new Triangule(x, y, base, height);
+            v.push_back(t);
+        }
+
+        
     }
 
     return SUCCESS;
