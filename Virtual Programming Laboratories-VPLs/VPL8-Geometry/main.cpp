@@ -1,16 +1,18 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <math.h>
 #include <vector>
+
 
 #define SUCCESS 0
 
 class Point {
 private:
-    float _x;
-    float _y;
+    int _x;
+    int _y;
 public:
-    Point(float x, float y) : _x(x), _y(y) {}; 
+    Point(int x, int y) : _x(x), _y(y) {}; 
 
     Point() : Point(0,0) {};
 
@@ -20,20 +22,21 @@ public:
     int get_y() {
         return _y;
     }
-    void set_x(float new_x) {
+    void set_x(int new_x) {
         this->_x = new_x;
     }
-    void set_y(float new_y) {
+    void set_y(int new_y) {
         this->_y = new_y;
     }
 };
+
 
 
 class Geometric_figure {
 private:
     Point center;
 public:
-    Geometric_figure(float x, float y) {
+    Geometric_figure(int x, int y) {
         this->center.set_x(x);
         this->center.set_y(y);
     }
@@ -44,16 +47,20 @@ public:
 
     virtual float area() = 0;
 
+    virtual ~Geometric_figure() {}
+
 };
 
-class Retangule : public Geometric_figure {
+
+
+class Rectangule : public Geometric_figure {
 private:
     float side_a;
     float side_b;
 public:
-    Retangule(float x, float y, float a, float b) : Geometric_figure(x,y), side_a(a), side_b(b) {};
+    Rectangule(int x, int y, float a, float b) : Geometric_figure(x,y), side_a(a), side_b(b) {};
 
-    void draw() {
+    void draw() override {
         Geometric_figure::draw();
         std::cout << " RETANGULO" << std::endl;
     }
@@ -64,15 +71,17 @@ public:
 
 };
 
+
+
 class Triangule : public Geometric_figure {
 private:
     float base;
     float height;
     
 public:
-    Triangule(float x, float y, float b, float h) : Geometric_figure(x,y), base(b), height(h) {};
+    Triangule(int x, int y, float b, float h) : Geometric_figure(x,y), base(b), height(h) {};
 
-    void draw() {
+    void draw() override {
         Geometric_figure::draw();
         std::cout << " TRIANGULO" << std::endl;
     }
@@ -81,13 +90,15 @@ public:
     }
 };
 
+
+
 class Circle : public Geometric_figure {
 private:
     float radius;
 public:
-    Circle(float x, float y, float r) : Geometric_figure(x,y), radius(r) {};
+    Circle(int x, int y, float r) : Geometric_figure(x,y), radius(r) {};
 
-    void draw() {
+    void draw() override {
         Geometric_figure::draw();
         std::cout << " CIRCULO" << std::endl;
     }
@@ -98,21 +109,20 @@ public:
 
 
 
-
 int main() {
     std::vector<Geometric_figure*> v;   
     char command;
-    float x;
-    float y;
+    int x;
+    int y;
 
-    while (0) {
+    while (true) {
         std::cin >> command;
         if(command == 'R') {
             float side_a;
             float side_b;
             std::cin >> x >> y >> side_a >> side_b;
 
-            Retangule* r = new Retangule(x, y, side_a, side_b);
+            Rectangule* r = new Rectangule(x, y, side_a, side_b);
             v.push_back(r);
         }
         
@@ -124,7 +134,7 @@ int main() {
             v.push_back(c);
         }
 
-        if(command = 'T') {
+        if(command == 'T') {
             float base;
             float height;
             std::cin >> x >> y >> base >> height;
@@ -133,8 +143,32 @@ int main() {
             v.push_back(t);
         }
 
-        
+        if(command == 'D') {
+            for(auto figure : v) {
+                figure->draw();
+            }
+        }
+
+        if(command == 'A') {
+            float total_area = 0;
+            for(auto figure : v) {
+                total_area += figure->area();
+            }
+            std::cout << std::setprecision(2) << std::fixed << total_area << std::endl;
+        }
+
+        if(command == 'E') {
+            break;
+        }
     }
+
+    for(auto figure : v) {
+        delete figure;
+    }
+    v.clear();
 
     return SUCCESS;
 }
+
+
+
